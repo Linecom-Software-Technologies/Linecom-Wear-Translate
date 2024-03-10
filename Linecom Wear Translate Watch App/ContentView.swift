@@ -33,23 +33,23 @@ struct ContentView: View {
         NavigationStack {
             List {
                 Section {
-                    Picker("源语言",selection: $sourcelang) {
-                        Text("自动").tag("auto")
-                        Text("简体中文").tag("zh")
-                        Text("繁体中文").tag("cht")
-                        Text("英语").tag("en")
-                        Text("日语").tag("jp")
+                    Picker("From",selection: $sourcelang) {
+                        Text("Auto").tag("auto")
+                        Text("Simplified Chinese").tag("zh")
+                        Text("Traditional Chinese").tag("cht")
+                        Text("English (US)").tag("en")
+                        Text("日Japanese").tag("jp")
                         
                     }
-                    Picker("目标语言",selection: $targetlang) {
-                        Text("简体中文").tag("zh")
-                        Text("繁体中文").tag("cht")
-                        Text("英语").tag("en")
-                        Text("日语").tag("jp")
+                    Picker("To",selection: $targetlang) {
+                        Text("Simplified Chinese").tag("zh")
+                        Text("Traditional Chinese").tag("cht")
+                        Text("English (US)").tag("en")
+                        Text("日Japanese").tag("jp")
                     }
                 }
                 Section {
-                    TextField("键入源语言",text: $slang)
+                    TextField("Type Text to Translate",text: $slang)
                 }
                 Section {
                     Button(action: {
@@ -63,22 +63,22 @@ struct ContentView: View {
                         let allurl="https://fanyi-api.baidu.com/api/trans/vip/translate?\(all)"
                             DarockKit.Network.shared.requestJSON(allurl.urlEncoded()){ respond, succeed in
                                 if !succeed{
-                                    translatedText="WARN: 翻译请求失败"
+                                    translatedText="WARN: Request Failed"
                                     requesting=false
                                 }else{
-                                    let receiveddata=respond["trans_result"][0]["dst"].string ?? "WARN: 翻译返回错误"
+                                    let receiveddata=respond["trans_result"][0]["dst"].string ?? "WARN: Ruturned an Error"
                                     requesting=false
                                     sdata=respond["trans_result"][0]["src"].string ?? ""
                                     translatedText=receiveddata
                                     let currentlang=respond["from"].string
                                     if currentlang=="en"{
-                                        dislang="英语"
+                                        dislang="English"
                                     } else if currentlang=="zh"{
-                                        dislang="简体中文"
+                                        dislang="Simplified Chinese"
                                     } else if currentlang=="cht"{
-                                        dislang="繁体中文"
+                                        dislang="Traditional Chinese"
                                     } else if currentlang=="jp" {
-                                        dislang="日语"
+                                        dislang="Japanese"
                                     }
                                     
                                 }
@@ -91,35 +91,35 @@ struct ContentView: View {
                             let custallurl="https://fanyi-api.baidu.com/api/trans/vip/translate?\(custall)"
                             DarockKit.Network.shared.requestJSON(custallurl.urlEncoded()){ respond, succeed in
                                 if !succeed{
-                                    translatedText="WARN: 翻译请求失败"
+                                    translatedText="WARN: Request Failed"
                                     requesting=false
                                 }else{
-                                    let receiveddata=respond["trans_result"][0]["dst"].string ?? "WARN: 翻译返回错误"
+                                    let receiveddata=respond["trans_result"][0]["dst"].string ?? "WARN: Returned an Error"
                                     requesting=false
                                     sdata=respond["trans_result"][0]["src"].string ?? ""
                                     translatedText=receiveddata
                                     let currentlang=respond["from"].string
                                     if currentlang=="en"{
-                                        dislang="英语"
+                                        dislang="English"
                                     } else if currentlang=="zh"{
-                                        dislang="简体中文"
+                                        dislang="Simplified Chinese"
                                     } else if currentlang=="cht"{
-                                        dislang="繁体中文"
+                                        dislang="Traditional Chinese"
                                     } else if currentlang=="jp" {
-                                        dislang="日语"
+                                        dislang="Japanese"
                                     }
                                     
                                 }
                             }
                         } else{
                             requesting=false
-                            translatedText="ERROR:请输入APPID与密钥"
+                            translatedText="ERROR: Please Input APPID and Secert"
                         }
                     }, label: {
                         if requesting {
                             HStack{
                                 Spacer()
-                                Text("正在请求")
+                                Text("Requesting")
                                 ProgressView()
                                 Spacer()
                             }
@@ -127,7 +127,7 @@ struct ContentView: View {
                             HStack{
                                 Spacer()
                                 Image(systemName: "globe")
-                                Text("翻译")
+                                Text("Translate")
                                 Spacer()
                             }
                         }
@@ -143,7 +143,7 @@ struct ContentView: View {
                                 Spacer();Text(sdata).frame(alignment: .center);Spacer()
                             }
                             HStack{
-                                Spacer();Text("从\(dislang)翻译：").frame(alignment: .center);Spacer()
+                                Spacer();Text("Translate From \(dislang):").frame(alignment: .center);Spacer()
                             }
                             HStack{
                                 Spacer();Text(translatedText).frame(alignment: .center);Spacer()
@@ -159,7 +159,7 @@ struct ContentView: View {
                                             HStack{
                                                 Spacer()
                                                 Image(systemName: "restart")
-                                                Text("重置")
+                                                Text("Reset")
                                                 Spacer()
                                             }
                                                       })
@@ -167,15 +167,15 @@ struct ContentView: View {
                     }
                 }
                 Section {
-                    NavigationLink(destination:{SettingsView().navigationTitle("设置")},label:{HStack{Spacer();Image(systemName: "gear")
-                        Text("设置");Spacer()}})
-                    NavigationLink(destination:{AboutView().navigationTitle("关于LWT")},label:{HStack{Spacer();Image(systemName: "info.circle")
-                        Text("关于");Spacer()
+                    NavigationLink(destination:{SettingsView().navigationTitle("Settings")},label:{HStack{Spacer();Image(systemName: "gear")
+                        Text("Settings");Spacer()}})
+                    NavigationLink(destination:{AboutView().navigationTitle("About LWT")},label:{HStack{Spacer();Image(systemName: "info.circle")
+                        Text("About");Spacer()
                     }})
                 }
 
             }
-            .navigationTitle("LWT翻译")
+            .navigationTitle("LWTranslate")
         }
     }
 }

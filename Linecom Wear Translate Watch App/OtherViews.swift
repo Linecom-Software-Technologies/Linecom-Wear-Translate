@@ -11,8 +11,8 @@ struct AboutView: View {
     var body: some View {
         TabView{
             AppAbout()
-            CerditView().navigationTitle("致谢")
-            OSPView().navigationTitle("开源许可")
+            CerditView().navigationTitle("Credits")
+            OSPView().navigationTitle("OSSLicense")
         }
     }
 }
@@ -25,8 +25,8 @@ struct AppAbout: View{
             }
             Text("Developed by Linecom").padding()
             Text("License under MIT.").font(.custom("", size: 12))
-            Text("浙ICP备00000000号-0A").font(.custom("", size: 11))
-            Text("*备案审核进行中，暂时作为PlaceHolder").font(.custom("", size: 6))
+            //Text("浙ICP备00000000号-0A").font(.custom("", size: 11))
+            //Text("*备案审核进行中，暂时作为PlaceHolder").font(.custom("", size: 6))
         }
     }
 }
@@ -36,7 +36,7 @@ struct CerditView: View{
             Section{
                     HStack{
                         Image("MEMZAvatar").resizable().scaledToFit().frame(width:43,height:43)
-                        Text("WindowsMEMZ\n提供代码指导。")
+                        Text("WindowsMEMZ")
                     }
             }
         }
@@ -56,11 +56,11 @@ struct SettingsView: View{
     var body: some View{
             NavigationStack{
                 Section{
-                    NavigationLink(destination:{apiconfigView().navigationTitle("配置密钥")},label:{Text("配置API密钥")})
+                    NavigationLink(destination:{apiconfigView().navigationTitle("Config Secert")},label:{Text("Config API Secert")})
                     
                 }
                 Section{
-                    NavigationLink(destination:{SupportView().navigationTitle("联系我们")},label:{Text("联系与反馈")})
+                    NavigationLink(destination:{SupportView().navigationTitle("Contact Us")},label:{Text("Contact and Feedback")})
                 }
             }
             //搁置
@@ -78,17 +78,17 @@ struct apiconfigView: View{
     var body: some View{
         List{
             Section{
-                Text("概述：")
-                Text("百度翻译自2022年8月1日起将每月免费的调用额度限制在100万字符，如果您有自己的密钥，您可以在此替换由澪空软件提供的默认密钥")
+                Text("Overview:")
+                Text("Starting from August 1, 2022, Baidu Translate will limit the monthly free call limit to 1 million characters. If you have your own key, you can replace the default key provided by Linecom here")
             }
             Section{
-                Toggle("使用自定义密钥",isOn: $customkeyenable)
+                Toggle("Use own API key",isOn: $customkeyenable)
             }
             if customkeyenable{
                 
                 Section{
                     TextField("APPID",text: $custid)
-                    TextField("密钥",text: $custkey)
+                    TextField("Secert",text: $custkey)
                 }
             }
         }
@@ -97,9 +97,9 @@ struct apiconfigView: View{
 struct SupportView: View{
     var body: some View{
         List{
-            Text("请通过邮件联系我们：")
+            Text("Contact us via Email")
             Text("linecom@linecom.net.cn").font(.custom("", size: 15))
-            Text("若您遇到了问题，请发送支持工单：")
+            Text("If you have trouble using, please send a ticket to us:")
             Text("support@linecom.net.cn").font(.custom("", size: 15))
         }
     }
