@@ -22,7 +22,7 @@ struct ContentView: View {
     @State var sdata=""
     @State var requesting=false
     @AppStorage("LastSource") var sourcelang="auto"
-    @AppStorage("LastTarget") var targetlang="en"
+    @AppStorage("LastTarget") var targetlang="zh"
     
     var body: some View {
         //搁置
@@ -38,14 +38,14 @@ struct ContentView: View {
                         Text("Simplified Chinese").tag("zh")
                         Text("Traditional Chinese").tag("cht")
                         Text("English (US)").tag("en")
-                        Text("日Japanese").tag("jp")
+                        Text("Japanese").tag("jp")
                         
                     }
                     Picker("To",selection: $targetlang) {
                         Text("Simplified Chinese").tag("zh")
                         Text("Traditional Chinese").tag("cht")
                         Text("English (US)").tag("en")
-                        Text("日Japanese").tag("jp")
+                        Text("Japanese").tag("jp")
                     }
                 }
                 Section {
