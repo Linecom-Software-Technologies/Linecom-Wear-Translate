@@ -26,7 +26,7 @@ struct ContentView: View {
     @AppStorage("CepheusEnable") var cepenable=false
     @State var NetPing=""
     @State var checking=false
-    @AppStorage("Trail") var trail=5
+    @AppStorage("Trail") var trail=0
     @State var baidugroup=["zh":"简体中文","cht":"繁体中文","en":"英语","jp":"日语","kor":"韩语","fra":"法语","ru":"俄语","de":"德语","spa":"西班牙语","bl":"波兰语"]
     @State var tencentgroup=["zh":"简体中文","zh-TW":"繁体中文","en":"英语","ja":"日语","ko":"韩语","fr":"法语","ru":"俄语","de":"德语","es":"西班牙语"]
     @State var transfl=""
@@ -98,16 +98,6 @@ struct ContentView: View {
                                 Picker("源语言",selection: $sourcelang) {
                                     if provider=="baidu"{
                                         Text("自动").tag("auto")
-                                        Text("简体中文").tag("zh")
-                                        Text("繁体中文").tag("cht")
-                                        Text("英语").tag("en")
-                                        Text("日语").tag("jp")
-                                        Text("韩语").tag("kor")
-                                        Text("法语").tag("fra")
-                                        Text("德语").tag("de")
-                                        Text("俄语").tag("ru")
-                                        Text("西班牙语").tag("spa")
-                                        Text("波兰语").tag("bl")
                                     } else if provider=="tencent"{
                                         Text("自动").tag("auto")
                                         Text("简体中文").tag("zh")
@@ -132,13 +122,6 @@ struct ContentView: View {
                                         Text("简体中文").tag("zh")
                                         Text("繁体中文").tag("cht")
                                         Text("英语").tag("en")
-                                        Text("日语").tag("jp")
-                                        Text("韩语").tag("kor")
-                                        Text("法语").tag("fra")
-                                        Text("德语").tag("de")
-                                        Text("俄语").tag("ru")
-                                        Text("西班牙语").tag("spa")
-                                        Text("波兰语").tag("bl")
                                     } else if provider=="tencent"{
                                         Text("简体中文").tag("zh")
                                         Text("繁体中文").tag("zh-TW")
@@ -158,11 +141,31 @@ struct ContentView: View {
                                 }
                                 Button(action: {
                                     // ...
+                                    let UDID = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "nil"
+                                    print(UDID)
                                     requesting = true
                                     if slang.isEmpty && !debugenable{
                                         translatedText="请输入文本"
                                         requesting=false
                                     } else if provider=="baidu"{
+                                        let UDID=WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "nil"
+                                        DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/lwt/trail?action=decrease&udid=\(UDID)"){
+                                            resp, success in
+                                            //if !success{
+                                            //    fatalError()
+                                            //}
+                                            print(resp)
+                                        }
+                                        DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/lwt/trail?action=query&udid=\(UDID)&reauth=1"){
+                                            resp, success in
+                                            print(resp)
+                                            trail=resp["remain"].int ?? trail
+                                        }
+                                        DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/lwt/trail?action=query&udid=\(UDID)&reauth=1"){
+                                            resp, success in
+                                            print(resp)
+                                            trail=resp["remain"].int ?? trail
+                                        }
                                         DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/lwt/translate?provider=\(provider)&text=\(slang)&slang=\(sourcelang)&tlang=\(targetlang)&pass=l1nec0m".urlEncoded()){
                                             resp, succeed in
                                             if !succeed{
@@ -173,7 +176,6 @@ struct ContentView: View {
                                             transfl=resp["from"].string ?? ""
                                             dislang=baidugroup[transfl] ?? ""
                                             requesting=false
-                                            trail-=1
                                         }
                                     }
                                 }, label: {
@@ -197,37 +199,37 @@ struct ContentView: View {
                                 })
                                 
                             }
-                        }
-                        if !translatedText.isEmpty {
-                            Section {
-                                if !slang.isEmpty{
-                                    HStack{
-                                        Spacer();Text(sdata).frame(alignment: .center);Spacer()
-                                    }
-                                }
-                                if !dislang.isEmpty{
-                                    HStack{
-                                        Text("从\(dislang)翻译：").bold().frame(alignment: .center)
-                                    }
-                                }
-                                HStack{
-                                    Spacer();Text(translatedText).frame(alignment: .center);Spacer()
-                                }
-                            }
-                            .padding()
-                            VStack{
-                                Section{
-                                    Button(action:{translatedText=""
-                                        slang=""
-                                        dislang=""
-                                    },label:{
+                            if !translatedText.isEmpty {
+                                Section {
+                                    if !slang.isEmpty{
                                         HStack{
-                                            Spacer()
-                                            Image(systemName: "restart")
-                                            Text("重置")
-                                            Spacer()
+                                            Spacer();Text(sdata).frame(alignment: .center);Spacer()
                                         }
-                                    })
+                                    }
+                                    if !dislang.isEmpty{
+                                        HStack{
+                                            Text("从\(dislang)翻译：").bold().frame(alignment: .center)
+                                        }
+                                    }
+                                    HStack{
+                                        Spacer();Text(translatedText).frame(alignment: .center);Spacer()
+                                    }
+                                }
+                                .padding()
+                                VStack{
+                                    Section{
+                                        Button(action:{translatedText=""
+                                            slang=""
+                                            dislang=""
+                                        },label:{
+                                            HStack{
+                                                Spacer()
+                                                Image(systemName: "restart")
+                                                Text("重置")
+                                                Spacer()
+                                            }
+                                        })
+                                    }
                                 }
                             }
                         } else{
@@ -255,6 +257,8 @@ struct ContentView: View {
                                 AboutView().navigationTitle("关于LWT").containerBackground(Color(hue: 141/360, saturation: 60/100, brightness: 100/100).gradient, for: .navigation)
                             } else {
                                 // Fallback on earlier versions
+                                AboutView()
+                                    .navigationTitle("关于LWT")
                             }},label:{HStack{Spacer();Image(systemName: "info.circle")
                                 Text("关于");Spacer()
                             }})
@@ -266,6 +270,7 @@ struct ContentView: View {
                 }
                 .navigationTitle("LWT翻译")
                 .onAppear(){
+                    let UDID = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "nil"
                     DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/status/check"){
                         respond, secceed in
                         if !secceed{
@@ -276,6 +281,17 @@ struct ContentView: View {
                             NetPing = "ok"
                         }
                     }
+                        DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/lwt/trail?action=create&udid=\(UDID)"){
+                            resp2, success2 in
+                            print(resp2)
+                        }
+                        DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/lwt/trail?action=query&udid=\(UDID)"){
+                            resp, success in
+                            //let result=resp["code"].int ?? -50301
+                            //print(result)
+                            trail=resp["remain"].int ?? 0
+                        }
+                    //trail=5
                 }
                 
             }

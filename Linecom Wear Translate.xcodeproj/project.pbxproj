@@ -480,8 +480,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.23;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate.watchkitapp;
+				MARKETING_VERSION = 1.0.26;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate.trail.watchkitapp;
 				PRODUCT_NAME = "澪空软件腕表翻译";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -511,8 +511,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.23;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate.watchkitapp;
+				MARKETING_VERSION = 1.0.26;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate.trail.watchkitapp;
 				PRODUCT_NAME = "澪空软件腕表翻译";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -532,8 +532,8 @@
 				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				INFOPLIST_KEY_CFBundleDisplayName = "Linecom Wear Translate";
-				MARKETING_VERSION = 1.0.23;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate;
+				MARKETING_VERSION = 1.0.26;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate.trail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -548,8 +548,8 @@
 				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				INFOPLIST_KEY_CFBundleDisplayName = "Linecom Wear Translate";
-				MARKETING_VERSION = 1.0.23;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate;
+				MARKETING_VERSION = 1.0.26;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate.trail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
