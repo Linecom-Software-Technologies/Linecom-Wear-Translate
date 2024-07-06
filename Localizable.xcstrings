@@ -26,6 +26,16 @@
     "**并非所有网页都能在 Apple Watch 上正常工作**\n\n请**不要**提出〇〇网站*打不开*、*有问题*之类的反馈" : {
 
     },
+    "%@%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@"
+          }
+        }
+      }
+    },
     "1.0.26" : {
       "localizations" : {
         "zh-Hant" : {
@@ -544,6 +554,7 @@
       }
     },
     "价格：%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -838,9 +849,6 @@
         }
       }
     },
-    "如已购买，请再次点击以确认" : {
-
-    },
     "存储草稿" : {
       "localizations" : {
         "en" : {
@@ -1017,6 +1025,7 @@
       }
     },
     "感谢您购买" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -1101,6 +1110,9 @@
 
     },
     "搁置" : {
+
+    },
+    "支持中心" : {
 
     },
     "文言->中文" : {
@@ -1336,6 +1348,12 @@
           }
         }
       }
+    },
+    "正在购买..." : {
+
+    },
+    "正在载入订阅选项..." : {
+
     },
     "此反馈已关闭，若要重新进行反馈，请创建一个新的反馈" : {
       "localizations" : {
@@ -1833,6 +1851,9 @@
         }
       }
     },
+    "订阅" : {
+
+    },
     "设置" : {
       "localizations" : {
         "en" : {
@@ -1968,6 +1989,7 @@
       }
     },
     "购买" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1982,6 +2004,12 @@
           }
         }
       }
+    },
+    "购买失败: %@" : {
+
+    },
+    "购买成功" : {
+
     },
     "软件更新" : {
       "localizations" : {
@@ -2009,6 +2037,9 @@
         }
       }
     },
+    "进入订阅页面" : {
+
+    },
     "通用" : {
       "localizations" : {
         "en" : {
@@ -2032,6 +2063,7 @@
 
     },
     "邮件" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2209,6 +2241,7 @@
 
     },
     "额外提供商现已可用" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2225,6 +2258,7 @@
       }
     },
     "额外翻译提供商" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

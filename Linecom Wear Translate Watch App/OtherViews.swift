@@ -232,6 +232,11 @@ struct SettingsView: View{
             if debugdisplay{
                 Section{
                     Toggle("调试模式",isOn: $debugmode)
+                    NavigationLink(destination: {
+                        SubscriptionView()
+                    }, label: {
+                        Text("进入订阅页面")
+                    })
                     Button("重设购买状态",action: {
                         buyed=false
                     })
