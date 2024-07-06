@@ -25,11 +25,13 @@ struct ContentView: View {
     @AppStorage("CepheusEnable") var cepenable=false
     @State var NetPing=""
     @State var checking=false
+    @StateObject private var iapManager = IAPManager.shared
     @State var baidugroup=["zh":"简体中文","cht":"繁体中文","en":"英语","jp":"日语","kor":"韩语","fra":"法语","ru":"俄语","de":"德语","spa":"西班牙语","bl":"波兰语"]
     @State var tencentgroup=["zh":"简体中文","zh-TW":"繁体中文","en":"英语","ja":"日语","ko":"韩语","fr":"法语","ru":"俄语","de":"德语","es":"西班牙语"]
     @State var transfl=""
     @State var notice=""
     @AppStorage("hideos9tip") var hideos9tip=false
+    @AppStorage("isSubscribed") private var isSubscribed: Bool = false
     var body: some View {
         //搁置
         //if !lastenable{
@@ -46,6 +48,7 @@ struct ContentView: View {
                                 Text("Debug enabled")
                                 Spacer()
                             }
+                            Text("订阅状态：\(isSubscribed)")
                         }
                     }
                     if NetPing=="" && !debugenable{
@@ -582,6 +585,8 @@ struct ContentView: View {
                             }
                         }
                     }
+                    iapManager.startObserving()
+                    iapManager.refreshSubscriptionStatus()
                 }
             }
         }
